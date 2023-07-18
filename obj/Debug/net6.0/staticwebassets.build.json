@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "Hash": "4Jevyr2XEOYS25tBDYuV0UmNtaGviN7+jZU3q9Q3UDs=",
+  "Source": "Api-ProjectManagement",
+  "BasePath": "_content/Api-ProjectManagement",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Api-ProjectManagement\\wwwroot",
+      "Source": "Api-ProjectManagement",
+      "ContentRoot": "C:\\Users\\Axel\\Desktop\\.NetCore\\Api-ProjectManagement\\wwwroot\\",
+      "BasePath": "_content/Api-ProjectManagement",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Axel\\Desktop\\.NetCore\\Api-ProjectManagement\\wwwroot\\Fotos\\28a87cab-50ac-4c87-9e59-527a28b8c5fa.jpg",
+      "SourceId": "Api-ProjectManagement",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Axel\\Desktop\\.NetCore\\Api-ProjectManagement\\wwwroot\\",
+      "BasePath": "_content/Api-ProjectManagement",
+      "RelativePath": "Fotos/28a87cab-50ac-4c87-9e59-527a28b8c5fa.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Fotos\\28a87cab-50ac-4c87-9e59-527a28b8c5fa.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Axel\\Desktop\\.NetCore\\Api-ProjectManagement\\wwwroot\\Fotos\\a4c98b2a-c378-4f94-b889-353b1d0dae29.jpeg",
+      "SourceId": "Api-ProjectManagement",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Axel\\Desktop\\.NetCore\\Api-ProjectManagement\\wwwroot\\",
+      "BasePath": "_content/Api-ProjectManagement",
+      "RelativePath": "Fotos/a4c98b2a-c378-4f94-b889-353b1d0dae29.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Fotos\\a4c98b2a-c378-4f94-b889-353b1d0dae29.jpeg"
+    }
+  ]
+}
