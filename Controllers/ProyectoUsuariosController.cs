@@ -24,5 +24,12 @@ namespace Api_ProjectManagement.Controllers
             var result = await _userProjectServices.AgregarUsuarioAProyecto(model);
             return Ok(result);
         }
+
+        [HttpDelete("eliminarUsuarioProyecto/{IdProyecto}/{IdUsuario}")]
+        public async Task<IActionResult> EliminarUsuarioProyecto(int IdProyecto, int IdUsuario)
+        {
+            var result = await _userProjectServices.EliminarUsuarioProyect(IdProyecto, IdUsuario);
+            return Ok(result);
+        }
     }
 }

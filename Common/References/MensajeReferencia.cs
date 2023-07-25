@@ -22,5 +22,6 @@
         public const string ConsultaExitosa = "Consulta exitosa";
         public const string TareaNoEncontrada = "Esta tarea no existe";
         public const string RecursoNoEncontrado = "Recurso no encontrado";
+        public const string UpdateSuccess = "Actualizacion exitosa";
     }
 }

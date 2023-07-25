@@ -1,12 +1,32 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\Axel\\Desktop\\.NetCore\\Api-ProjectManagement\\wwwroot\\Fotos\\28a87cab-50ac-4c87-9e59-527a28b8c5fa.jpg",
+      "Id": "C:\\Users\\Axell\\OneDrive\\Escritorio\\.NetCore\\SistemaGestionProyectos-Api\\wwwroot\\Fotos\\28a87cab-50ac-4c87-9e59-527a28b8c5fa.jpg",
       "PackagePath": "staticwebassets\\Fotos\\28a87cab-50ac-4c87-9e59-527a28b8c5fa.jpg"
     },
     {
-      "Id": "C:\\Users\\Axel\\Desktop\\.NetCore\\Api-ProjectManagement\\wwwroot\\Fotos\\a4c98b2a-c378-4f94-b889-353b1d0dae29.jpeg",
+      "Id": "C:\\Users\\Axell\\OneDrive\\Escritorio\\.NetCore\\SistemaGestionProyectos-Api\\wwwroot\\Fotos\\5ee233d3-793c-4804-b676-3d5ada118c2b.jpeg",
+      "PackagePath": "staticwebassets\\Fotos\\5ee233d3-793c-4804-b676-3d5ada118c2b.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Axell\\OneDrive\\Escritorio\\.NetCore\\SistemaGestionProyectos-Api\\wwwroot\\Fotos\\71196dec-5505-4ada-a8e6-d407d31b9d3f.jpg",
+      "PackagePath": "staticwebassets\\Fotos\\71196dec-5505-4ada-a8e6-d407d31b9d3f.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Axell\\OneDrive\\Escritorio\\.NetCore\\SistemaGestionProyectos-Api\\wwwroot\\Fotos\\a4c98b2a-c378-4f94-b889-353b1d0dae29.jpeg",
       "PackagePath": "staticwebassets\\Fotos\\a4c98b2a-c378-4f94-b889-353b1d0dae29.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Axell\\OneDrive\\Escritorio\\.NetCore\\SistemaGestionProyectos-Api\\wwwroot\\Fotos\\be978d45-e5bf-4c27-9655-c739ce6dd11a.jpeg",
+      "PackagePath": "staticwebassets\\Fotos\\be978d45-e5bf-4c27-9655-c739ce6dd11a.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Axell\\OneDrive\\Escritorio\\.NetCore\\SistemaGestionProyectos-Api\\wwwroot\\Fotos\\d96f2a41-c636-421d-ba7d-08b3661bcce6.jpeg",
+      "PackagePath": "staticwebassets\\Fotos\\d96f2a41-c636-421d-ba7d-08b3661bcce6.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Axell\\OneDrive\\Escritorio\\.NetCore\\SistemaGestionProyectos-Api\\wwwroot\\Fotos\\ddbc526c-7cf2-4ed3-8c41-82055580685e.jpeg",
+      "PackagePath": "staticwebassets\\Fotos\\ddbc526c-7cf2-4ed3-8c41-82055580685e.jpeg"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.Api-ProjectManagement.Microsoft.AspNetCore.StaticWebAssets.props",

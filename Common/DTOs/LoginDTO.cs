@@ -29,4 +29,10 @@ namespace Api_ProjectManagement.Common.DTOs
         public string NombresCompleto { get; set;}
         public string Foto { get; set; }
     }
+
+    public class GetLeaderProyectDTO
+    {
+        public int IdUsuario { get; set; }
+        public string NombresCompleto { get; set; }
+    }
 }

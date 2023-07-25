@@ -13,6 +13,7 @@ namespace Api_ProjectManagement.Common.Util
             CreateMap<CreateProyectoDTO, Proyecto>().ReverseMap();
             CreateMap<AgregarTareasDTO, Tarea>();
             CreateMap<ComentariosDTO, Comentario>().ReverseMap();
+            CreateMap<Estado, EstadoDTO>().ReverseMap();
         }
     }
 }

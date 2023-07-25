@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Axel\\Desktop\\.NetCore\\Api-ProjectManagement\\Api-ProjectManagement.csproj": {}
+    "C:\\Users\\Axell\\OneDrive\\Escritorio\\.NetCore\\SistemaGestionProyectos-Api\\Api-ProjectManagement.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Axel\\Desktop\\.NetCore\\Api-ProjectManagement\\Api-ProjectManagement.csproj": {
+    "C:\\Users\\Axell\\OneDrive\\Escritorio\\.NetCore\\SistemaGestionProyectos-Api\\Api-ProjectManagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Axel\\Desktop\\.NetCore\\Api-ProjectManagement\\Api-ProjectManagement.csproj",
+        "projectUniqueName": "C:\\Users\\Axell\\OneDrive\\Escritorio\\.NetCore\\SistemaGestionProyectos-Api\\Api-ProjectManagement.csproj",
         "projectName": "Api-ProjectManagement",
-        "projectPath": "C:\\Users\\Axel\\Desktop\\.NetCore\\Api-ProjectManagement\\Api-ProjectManagement.csproj",
-        "packagesPath": "C:\\Users\\Axel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Axel\\Desktop\\.NetCore\\Api-ProjectManagement\\obj\\",
+        "projectPath": "C:\\Users\\Axell\\OneDrive\\Escritorio\\.NetCore\\SistemaGestionProyectos-Api\\Api-ProjectManagement.csproj",
+        "packagesPath": "C:\\Users\\Axell\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Axell\\OneDrive\\Escritorio\\.NetCore\\SistemaGestionProyectos-Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Axel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Axell\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

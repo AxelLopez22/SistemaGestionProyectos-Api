@@ -25,6 +25,20 @@ namespace Api_ProjectManagement.Controllers
             return Ok(result);
         }
 
+        [HttpGet("getUserByProyect/{IdProyect}")]
+        public async Task<IActionResult> GetUserByProyect(int IdProyect)
+        {
+            var result = await _proyectoServices.GetUsersProyect(IdProyect);
+            return Ok(result);
+        }
+
+        [HttpGet("getLeaderProyect/{IdProyect}")]
+        public async Task<IActionResult> GetLeaderProyect(int IdProyect)
+        {
+            var result = await _proyectoServices.GetLeaderProyect(IdProyect);
+            return Ok(result);
+        }
+
         [HttpGet("getAllProyects")]
         public async Task<IActionResult> GetAllProyects()
         {
@@ -36,6 +50,13 @@ namespace Api_ProjectManagement.Controllers
         public async Task<IActionResult> GetAllProyectsByUser(int IdUsuario)
         {
             var result = await _proyectoServices.GetProyectByUser(IdUsuario);
+            return Ok(result);
+        }
+
+        [HttpGet("getProyectById/{IdProyect}")]
+        public async Task<IActionResult> GetProyectById(int IdProyect)
+        {
+            var result = await _proyectoServices.GetProyectById(IdProyect);
             return Ok(result);
         }
 

@@ -23,10 +23,19 @@ namespace Api_ProjectManagement.Services
         {
             var response = new ModelResponse();
             Proyecto proyecto = new Proyecto();
+            ProyectoUsuario userPro = new ProyectoUsuario();
 
             proyecto = _mapper.Map<Proyecto>(model);
 
+
             await _context.Proyectos.AddAsync(proyecto);
+            await _context.SaveChangesAsync();
+
+            userPro.IdProyecto = proyecto.IdProyecto;
+            userPro.IdUsuario = model.IdUsuario;
+            userPro.Estado = true;
+
+            await _context.ProyectoUsuarios.AddAsync(userPro);
             await _context.SaveChangesAsync();
 
             response.Success = true;
@@ -57,11 +66,29 @@ namespace Api_ProjectManagement.Services
             return response;
         }
 
-        public async Task<ModelResponse> GetProyectByUser(int IdUsuario)
+        public async Task<ModelResponse> GetLeaderProyect(int IdProyecto)
         {
             var response = new ModelResponse();
 
-            var result = await _context.Proyectos.Where(x => x.IdUsuarioNavigation.IdUsuario == IdUsuario || x.IdUsuario == IdUsuario)
+            var result = await _context.Proyectos.Where(x => x.IdProyecto == IdProyecto)
+                .Select(s => new GetLeaderProyectDTO()
+                {
+                    IdUsuario = s.IdUsuarioNavigation.IdUsuario,
+                    NombresCompleto = s.IdUsuarioNavigation.Nombres + " " + s.IdUsuarioNavigation.Apellidos
+                }).FirstOrDefaultAsync();
+
+            response.Success = true;
+            response.Data = result;
+            response.Message = MensajeReferencia.ConsultaExitosa;
+
+            return response;
+        }
+
+        public async Task<ModelResponse> GetProyectById(int IdProyecto)
+        {
+            var response = new ModelResponse();
+
+            var result = await _context.Proyectos.Where(x => x.IdProyecto == IdProyecto)
                 .Select(x => new ListProyectByUserDTO()
                 {
                     IdProyecto = x.IdProyecto,
@@ -70,11 +97,70 @@ namespace Api_ProjectManagement.Services
                     Estado = x.IdEstadoNavigation.Nombre
                 }).ToListAsync();
 
+            if (result.Count() == 0)
+            {
+                response.Success = false;
+                response.Data = null;
+                response.Message = MensajeReferencia.RecursoNoEncontrado;
+
+                return response;
+            }
+
+            response.Success = true;
+            response.Data = result;
+            response.Message = MensajeReferencia.ConsultaExitosa;
+
+            return response;
+        }
+
+        public async Task<ModelResponse> GetProyectByUser(int IdUsuario)
+        {
+            var response = new ModelResponse();
+
+            var result = await _context.ProyectoUsuarios
+                .Where(x => x.IdUsuario == IdUsuario)
+                .Select(x => new ListProyectByUserDTO()
+                {
+                    IdProyecto = x.IdProyectoNavigation.IdProyecto,
+                    Nombre = x.IdProyectoNavigation.Nombre,
+                    Descripcion = x.IdProyectoNavigation.Descripcion,
+                    Estado = x.IdProyectoNavigation.IdEstadoNavigation.Nombre
+                }).ToListAsync();
+
             if(result.Count() == 0)
             {
                 response.Success = false;
                 response.Data = null;
                 response.Message = MensajeReferencia.RecursoNoEncontrado;
+
+                return response;
+            }
+
+            response.Success = true;
+            response.Data = result;
+            response.Message = MensajeReferencia.ConsultaExitosa;
+
+            return response;
+        }
+
+        public async Task<ModelResponse> GetUsersProyect(int IdProyecto)
+        {
+            var response = new ModelResponse();
+
+            var result = await _context.ProyectoUsuarios
+                .Where(x => x.IdProyecto == IdProyecto && x.Estado == true)
+                .Select(s => new GetUsuariosDTO()
+                {
+                    IdUsuario = (int)s.IdUsuarioNavigation.IdUsuario,
+                    NombresCompleto = s.IdUsuarioNavigation.Nombres + ' ' + s.IdUsuarioNavigation.Apellidos,
+                    Foto = s.IdUsuarioNavigation.Foto
+                }).ToListAsync();
+
+            if(result.Count == 0)
+            {
+                response.Success = false;
+                response.Data = null;
+                response.Message = MensajeReferencia.ErrorServidor;
 
                 return response;
             }
@@ -149,5 +235,8 @@ namespace Api_ProjectManagement.Services
         Task<bool> UpdateProject(int IdProyecto, UpdateProyectoDto model);
         Task<bool> UpdateStateProject(int IdProyecto, int IdEstado);
         Task<ModelResponse> GetProyectByUser(int IdUsuario);
+        Task<ModelResponse> GetProyectById(int IdProyecto);
+        Task<ModelResponse> GetUsersProyect(int IdProyecto);
+        Task<ModelResponse> GetLeaderProyect(int IdProyecto);
     }
 }

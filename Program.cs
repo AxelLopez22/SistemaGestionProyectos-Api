@@ -37,6 +37,7 @@ builder.Services.AddScoped<IProyectoServices, ProyectoServices>();
 builder.Services.AddScoped<IProyectoUsuariosServices, ProyectoUsuariosServices>();
 builder.Services.AddScoped<ITareasServices, TareasServices>();
 builder.Services.AddScoped<IComentariosServices, ComentariosServices>();
+builder.Services.AddScoped<IEstadoServices, EstadoServices>();
 
 builder.Services.AddSwaggerConfig(TitleSwagger);
 builder.Services.AddConfigureCORS(MyAllowOrigins);

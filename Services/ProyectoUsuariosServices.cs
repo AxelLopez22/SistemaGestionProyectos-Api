@@ -3,6 +3,7 @@ using Api_ProjectManagement.Common.DTOs.Response;
 using Api_ProjectManagement.Common.References;
 using Api_ProjectManagement.Database;
 using Api_ProjectManagement.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Api_ProjectManagement.Services
 {
@@ -35,10 +36,29 @@ namespace Api_ProjectManagement.Services
 
             return response;
         }
+
+        public async Task<ModelResponse> EliminarUsuarioProyect(int IdProyecto, int IdUsuario)
+        {
+            var response = new ModelResponse();
+
+            var result = await _context.ProyectoUsuarios.Where(x => x.IdProyecto == IdProyecto && x.IdUsuario == IdUsuario && x.Estado == true)
+                .FirstOrDefaultAsync();
+
+            result.Estado = false;
+            _context.ProyectoUsuarios.Update(result);
+            await _context.SaveChangesAsync();
+
+            response.Success = true;
+            response.Data = null;
+            response.Message = MensajeReferencia.UpdateSuccess;
+
+            return response;
+        }
     }
 
     public interface IProyectoUsuariosServices
     {
         Task<ModelResponse> AgregarUsuarioAProyecto(ProyectoUsuariosDTO model);
+        Task<ModelResponse> EliminarUsuarioProyect(int IdProyecto, int IdUsuario);
     }
 }
