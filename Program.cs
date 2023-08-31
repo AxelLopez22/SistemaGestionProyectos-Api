@@ -6,6 +6,12 @@ using Api_ProjectManagement.Services;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.SignalR;
+using Api_ProjectManagement.Services.Hubs;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 string TitleSwagger = "API PROJECT MANAGEMENT";
@@ -26,9 +32,15 @@ var mapperConfigure = new MapperConfiguration(mc =>
 IMapper mapper = mapperConfigure.CreateMapper();
 builder.Services.AddSingleton(mapper);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+.AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
+
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Services.AddSignalR();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ITokenServices, TokenServices>();
 builder.Services.AddScoped<IUserServices, UserServices>();
@@ -38,6 +50,21 @@ builder.Services.AddScoped<IProyectoUsuariosServices, ProyectoUsuariosServices>(
 builder.Services.AddScoped<ITareasServices, TareasServices>();
 builder.Services.AddScoped<IComentariosServices, ComentariosServices>();
 builder.Services.AddScoped<IEstadoServices, EstadoServices>();
+builder.Services.AddScoped<IPrioridadServices, PrioridadServices>();
+builder.Services.AddTransient<HubCommentNotify>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["LlaveJwt"])),
+        ClockSkew = TimeSpan.Zero
+    });
+
 
 builder.Services.AddSwaggerConfig(TitleSwagger);
 builder.Services.AddConfigureCORS(MyAllowOrigins);
@@ -64,5 +91,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<HubGroup>("hub/group");
+
+app.MapHub<HubCommentNotify>("hub/comment");
 
 app.Run();

@@ -3,6 +3,8 @@ using Api_ProjectManagement.Common.DTOs.Response;
 using Api_ProjectManagement.Common.References;
 using Api_ProjectManagement.Database;
 using Api_ProjectManagement.Models;
+using Api_ProjectManagement.Services.Hubs;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api_ProjectManagement.Services
@@ -10,26 +12,58 @@ namespace Api_ProjectManagement.Services
     public class ComentariosServices : IComentariosServices
     {
         private readonly ProjectManagementDBContext _context;
+        private readonly IHubContext<HubCommentNotify> _hubContext;
 
-        public ComentariosServices(ProjectManagementDBContext context)
+
+        public ComentariosServices(ProjectManagementDBContext context, IHubContext<HubCommentNotify> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
+            //_hubContext = hubContext;
         }
 
         public async Task<ModelResponse> AgregarComentario(ComentariosDTO model)
         {
             var response = new ModelResponse();
 
-            Comentario comentario = new Comentario();
-            comentario.Descripcion = model.Descripcion;
-            comentario.IdComentario = model.IdUsuario;
-            comentario.IdArchivo = model.IdArchivo;
-            comentario.IdTarea = model.IdTarea;
+            try
+            {
+                Comentario comentario = new Comentario();
+                comentario.Descripcion = model.Descripcion;
+                comentario.IdUsuario = model.IdUsuario;
+                comentario.IdArchivo = model.IdArchivo;
+                comentario.IdTarea = model.IdTarea;
 
-            await _context.Comentarios.AddAsync(comentario);
-            await _context.SaveChangesAsync();
+                await _context.Comentarios.AddAsync(comentario);
+                await _context.SaveChangesAsync();
 
-            return response;
+                var nuevoComentario = await _context.Comentarios.Where(x => x.IdComentario == comentario.IdComentario)
+                    .Select(s => new ListarComentariosDTO()
+                    {
+                        IdComentario = s.IdComentario,
+                        Descripcion = s.Descripcion,
+                        Usuario = s.IdUsuarioNavigation.Nombres + " " + s.IdUsuarioNavigation.Apellidos,
+                        Foto = s.IdUsuarioNavigation.Foto
+                    }).FirstAsync();
+
+                //int idProyecto = (int)await _context.Tareas.Where(x => x.IdTarea == model.IdTarea).Select(x => x.IdProyecto).FirstAsync();
+
+                await _hubContext.Clients.All.SendAsync("NotifyComment", nuevoComentario);
+
+                response.Success = true;
+                response.Data = null;
+                response.Message = MensajeReferencia.AgregarComentario;
+
+                return response;
+            }
+            catch(Exception ex)
+            {
+                response.Success = false;
+                response.Data = ex;
+                response.Message = ex.Message; 
+                return response;
+            }
+           
         }
 
         public async Task<ModelResponse> ListarComentarios(int IdTarea)
@@ -41,7 +75,8 @@ namespace Api_ProjectManagement.Services
                 {
                      IdComentario = s.IdComentario,
                      Descripcion = s.Descripcion,
-                     Usuario = s.IdUsuarioNavigation.Nombres + " " + s.IdUsuarioNavigation.Apellidos
+                     Usuario = s.IdUsuarioNavigation.Nombres + " " + s.IdUsuarioNavigation.Apellidos,
+                     Foto = s.IdUsuarioNavigation.Foto
                 }).ToListAsync();
 
             if(result.Count() != 0)

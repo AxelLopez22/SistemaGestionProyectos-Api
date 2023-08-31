@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Api_ProjectManagement.Models;
+using Microsoft.Data.SqlClient;
+using System.Text.Json;
+using Api_ProjectManagement.Common.DTOs;
 
 namespace Api_ProjectManagement.Database
 {
@@ -28,6 +31,7 @@ namespace Api_ProjectManagement.Database
         public virtual DbSet<Tarea> Tareas { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
         public virtual DbSet<UsuariosRole> UsuariosRoles { get; set; } = null!;
+        public virtual DbSet<sp_ListarTareas> Sp_ListarTareas { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

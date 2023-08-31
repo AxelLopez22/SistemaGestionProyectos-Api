@@ -11,11 +11,17 @@ namespace Api_ProjectManagement.Common.DTOs
         public DateTime FechaFin { get; set; }
         [Required]
         public int IdProyecto { get; set; }
-        public int IdTareaPadre { get; set; }
+        //public int IdTareaPadre { get; set; }
         [Required]
         public int IdUsuario { get; set; }
-        public int IdArchivo { get; set; }
+        public int? IdArchivo { get; set; }
         public int IdPrioridad { get; set; }
+        public List<AgregarTareasDTO> SubTareas { get; set; }
+
+        public AgregarTareasDTO()
+        {
+            this.SubTareas = new List<AgregarTareasDTO>();
+        }
     }
 
     public class CambiarPrioridadDTO
@@ -29,5 +35,28 @@ namespace Api_ProjectManagement.Common.DTOs
         public int IdTarea { get; set; }
         public int IdUsuario { get; set; }
         public int IdEstado { get; set; }
+    }
+
+    public class TareaDTO
+    {
+        public int IdTarea { get; set; }
+        public string Nombre { get; set; } = null!;
+        public string Descripcion { get; set; } = null!;
+        public DateTime? FechaInicio { get; set; }
+        public DateTime? FechaFin { get; set; }
+        public string Estado { get; set; }
+        public string Responsable { get; set; }
+        public string UrlArchivo { get; set; }
+        public string Prioridad { get; set; }
+        public List<TareaDTO> SubTareas { get; set; }
+    }
+
+    public class sp_ListarTareas
+    {
+        [Key]
+        public int IdTarea { get; set; }
+        public string Descripcion { get; set; }
+        public DateTime FechaFin { get; set; }
+        public string Prioridad { get; set; }
     }
 }

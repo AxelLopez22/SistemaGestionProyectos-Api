@@ -1,5 +1,7 @@
 ﻿using Api_ProjectManagement.Common.DTOs;
 using Api_ProjectManagement.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +9,7 @@ namespace Api_ProjectManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProyectoController : ControllerBase
     {
         private readonly IProyectoServices _proyectoServices;

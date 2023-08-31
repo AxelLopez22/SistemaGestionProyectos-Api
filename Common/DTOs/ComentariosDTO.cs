@@ -10,7 +10,7 @@ namespace Api_ProjectManagement.Common.DTOs
         public int IdUsuario { get; set; }
         [Required]
         public int IdTarea { get; set; }
-        public int IdArchivo { get; set; }
+        public int? IdArchivo { get; set; }
     }
 
     public class ListarComentariosDTO
@@ -18,5 +18,6 @@ namespace Api_ProjectManagement.Common.DTOs
         public int IdComentario { get; set; }
         public string Descripcion { get; set; }
         public string Usuario { get; set; }
+        public string Foto { get; set; }
     }
 }

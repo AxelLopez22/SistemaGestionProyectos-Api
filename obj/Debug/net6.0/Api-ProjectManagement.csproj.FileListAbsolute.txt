@@ -142,3 +142,8 @@ C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\obj\Debu
 C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\obj\Debug\net6.0\Api-ProjectManagement.pdb
 C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\obj\Debug\net6.0\Api-ProjectManagement.genruntimeconfig.cache
 C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\obj\Debug\net6.0\ref\Api-ProjectManagement.dll
+C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\bin\Debug\net6.0\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\bin\Debug\net6.0\Microsoft.Owin.dll
+C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\bin\Debug\net6.0\Microsoft.Owin.Security.dll
+C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\bin\Debug\net6.0\Owin.dll

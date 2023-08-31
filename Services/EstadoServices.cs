@@ -57,11 +57,33 @@ namespace Api_ProjectManagement.Services
 
             return response;
         }
+
+        public async Task<ModelResponse> GetStatesByTask(int IdTask)
+        {
+            ModelResponse response = new ModelResponse();
+
+            //var task = await _context.Tareas.Where(x => x.IdTarea == IdTask).FirstOrDefaultAsync();
+
+
+            var state = await _context.Tareas.Where(x => x.IdTarea == IdTask)
+                .Select(x => new EstadoDTO()
+                {
+                    IdEstado = x.IdEstadoNavigation.IdEstado,
+                    Nombre = x.IdEstadoNavigation.Nombre
+                }).FirstOrDefaultAsync();
+
+            response.Success = true;
+            response.Data = state;
+            response.Message = MensajeReferencia.ConsultaExitosa;
+
+            return response;
+        }
     }
 
     public interface IEstadoServices
     {
         Task<ModelResponse> GetStates();
         Task<ModelResponse> GetStatesByProyect(int IdProyect);
+        Task<ModelResponse> GetStatesByTask(int IdTask);
     }
 }

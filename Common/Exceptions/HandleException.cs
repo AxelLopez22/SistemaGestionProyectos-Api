@@ -22,7 +22,7 @@ namespace Api_ProjectManagement.Common.Exceptions
             else if (ex is DbUpdateException)
             {
                 objRes.StatusCode = StatusCodes.Status400BadRequest;
-                objRes.Value = $"Ocurrió un error al intentar guardar en la DB. {ex.Message}";
+                objRes.Value = $"Ocurrió un error al intentar guardar en la DB. {ex.Message} + {ex.InnerException} + {ex.StackTrace}";
             }
             //objRes.Value = new { Mensaje = objRes.Value };
             objRes.Value = new { statusCode = objRes.StatusCode, mensaje = objRes.Value };

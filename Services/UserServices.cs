@@ -23,6 +23,24 @@ namespace Api_ProjectManagement.Services
             _fileServices = fileServices;
         }
 
+        public async Task<ModelResponse> AsignarUserRole(AsignarRolDTO model)
+        {
+            ModelResponse response = new ModelResponse();
+            
+            UsuariosRole userRole = new UsuariosRole();
+            userRole.IdUsuario = model.IdUsuario;
+            userRole.IdRol = model.IdRol;
+
+            await _context.UsuariosRoles.AddAsync(userRole);
+            await _context.SaveChangesAsync();
+
+            response.Success = true;
+            response.Data = null;
+            response.Message = MensajeReferencia.ConsultaExitosa;
+
+            return response;
+        }
+
         public async Task<ModelResponse> CreateUser(CrearUsuarioDTO model)
         {
             try
@@ -59,6 +77,24 @@ namespace Api_ProjectManagement.Services
             {
                 throw new HttpStatusException(HttpStatusCode.BadRequest, MensajeReferencia.FailedCreatedUser);
             }
+        }
+
+        public async Task<ModelResponse> GetRoles()
+        {
+            ModelResponse response = new ModelResponse();
+
+            var result = await _context.Roles.Where(x => x.Estado == true)
+                .Select(s => new ListarRoles()
+                {
+                    IdRol = s.IdRol,
+                    Nombre = s.Nombre,
+                }).ToListAsync();
+
+            response.Success = true;
+            response.Data = result;
+            response.Message = MensajeReferencia.ConsultaExitosa;
+
+            return response;
         }
 
         public async Task<ModelResponse> GetUsuarios()
@@ -106,5 +142,7 @@ namespace Api_ProjectManagement.Services
         Task<ModelResponse> Login(LoginDTO model);
         Task<ModelResponse> CreateUser(CrearUsuarioDTO model);
         Task<ModelResponse> GetUsuarios();
+        Task<ModelResponse> GetRoles();
+        Task<ModelResponse> AsignarUserRole(AsignarRolDTO model);
     }
 }

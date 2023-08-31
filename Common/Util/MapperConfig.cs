@@ -11,9 +11,11 @@ namespace Api_ProjectManagement.Common.Util
             CreateMap<CrearUsuarioDTO, Usuario>()
                 .ForMember(x => x.Foto, options => options.Ignore());
             CreateMap<CreateProyectoDTO, Proyecto>().ReverseMap();
-            CreateMap<AgregarTareasDTO, Tarea>();
+            CreateMap<AgregarTareasDTO, Tarea>()
+                .ForMember(dest => dest.InverseIdTareaPadreNavigation, opt => opt.Ignore());
             CreateMap<ComentariosDTO, Comentario>().ReverseMap();
             CreateMap<Estado, EstadoDTO>().ReverseMap();
+            CreateMap<PrioridadDTO, Prioridad>().ReverseMap();
         }
     }
 }
