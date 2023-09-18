@@ -11,6 +11,7 @@ namespace Api_ProjectManagement.Models
         public int? IdUsuario { get; set; }
         public int? IdTarea { get; set; }
         public int? IdArchivo { get; set; }
+        public DateTime? Fecha { get; set; }
 
         public virtual Archivo? IdArchivoNavigation { get; set; }
         public virtual Tarea? IdTareaNavigation { get; set; }

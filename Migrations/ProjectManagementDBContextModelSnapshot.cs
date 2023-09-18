@@ -22,6 +22,30 @@ namespace Api_ProjectManagement.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("Api_ProjectManagement.Common.DTOs.sp_ListarTareas", b =>
+                {
+                    b.Property<int>("IdTarea")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTarea"), 1L, 1);
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaFin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Prioridad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdTarea");
+
+                    b.ToTable("Sp_ListarTareas");
+                });
+
             modelBuilder.Entity("Api_ProjectManagement.Models.Archivo", b =>
                 {
                     b.Property<int>("IdArchivo")

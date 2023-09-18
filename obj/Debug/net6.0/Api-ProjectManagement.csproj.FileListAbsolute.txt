@@ -147,3 +147,4 @@ C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\bin\Debu
 C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\bin\Debug\net6.0\Microsoft.Owin.Security.dll
 C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\bin\Debug\net6.0\Owin.dll
+C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\bin\Debug\net6.0\appsettings.Production.json

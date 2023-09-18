@@ -17,7 +17,6 @@ var builder = WebApplication.CreateBuilder(args);
 string TitleSwagger = "API PROJECT MANAGEMENT";
 string MyAllowOrigins = "MyAllowOrigins";
 
-// Add services to the container.
 
 builder.Services.AddDbContext<ProjectManagementDBContext>(options =>
 {
@@ -72,7 +71,7 @@ builder.Services.AddConfigureCORS(MyAllowOrigins);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

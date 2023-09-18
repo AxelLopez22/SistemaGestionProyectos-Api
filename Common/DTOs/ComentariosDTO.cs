@@ -19,5 +19,7 @@ namespace Api_ProjectManagement.Common.DTOs
         public string Descripcion { get; set; }
         public string Usuario { get; set; }
         public string Foto { get; set; }
+        public DateTime? Fecha { get; set; }
+        public int IdTarea { get; set; }    
     }
 }

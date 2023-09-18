@@ -33,6 +33,7 @@ namespace Api_ProjectManagement.Services
                 comentario.IdUsuario = model.IdUsuario;
                 comentario.IdArchivo = model.IdArchivo;
                 comentario.IdTarea = model.IdTarea;
+                comentario.Fecha = DateTime.Now;
 
                 await _context.Comentarios.AddAsync(comentario);
                 await _context.SaveChangesAsync();
@@ -43,7 +44,9 @@ namespace Api_ProjectManagement.Services
                         IdComentario = s.IdComentario,
                         Descripcion = s.Descripcion,
                         Usuario = s.IdUsuarioNavigation.Nombres + " " + s.IdUsuarioNavigation.Apellidos,
-                        Foto = s.IdUsuarioNavigation.Foto
+                        Foto = s.IdUsuarioNavigation.Foto,
+                        Fecha = (DateTime)s.Fecha,
+                        IdTarea = (int)s.IdTarea
                     }).FirstAsync();
 
                 //int idProyecto = (int)await _context.Tareas.Where(x => x.IdTarea == model.IdTarea).Select(x => x.IdProyecto).FirstAsync();
@@ -51,7 +54,7 @@ namespace Api_ProjectManagement.Services
                 await _hubContext.Clients.All.SendAsync("NotifyComment", nuevoComentario);
 
                 response.Success = true;
-                response.Data = null;
+                response.Data = nuevoComentario;
                 response.Message = MensajeReferencia.AgregarComentario;
 
                 return response;
@@ -69,29 +72,41 @@ namespace Api_ProjectManagement.Services
         public async Task<ModelResponse> ListarComentarios(int IdTarea)
         {
             var response = new ModelResponse();
-
-            var result = await _context.Comentarios.Where(x => x.Estado == true && x.IdTarea == IdTarea)
-                .Select(s => new ListarComentariosDTO()
-                {
-                     IdComentario = s.IdComentario,
-                     Descripcion = s.Descripcion,
-                     Usuario = s.IdUsuarioNavigation.Nombres + " " + s.IdUsuarioNavigation.Apellidos,
-                     Foto = s.IdUsuarioNavigation.Foto
-                }).ToListAsync();
-
-            if(result.Count() != 0)
+            try
             {
-                response.Success = true;
-                response.Data = result;
-                response.Message = MensajeReferencia.ConsultaExitosa;
+                var result = await _context.Comentarios.Where(x => x.Estado == true && x.IdTarea == IdTarea)
+                    .Select(s => new ListarComentariosDTO()
+                    {
+                        IdComentario = s.IdComentario,
+                        Descripcion = s.Descripcion,
+                        Usuario = s.IdUsuarioNavigation.Nombres + " " + s.IdUsuarioNavigation.Apellidos,
+                        Foto = s.IdUsuarioNavigation.Foto,
+                        Fecha = (DateTime)s.Fecha,
+                        IdTarea = (int)s.IdTarea
+                    }).ToListAsync();
 
+                if (result.Count() != 0)
+                {
+                    response.Success = true;
+                    response.Data = result;
+                    response.Message = MensajeReferencia.ConsultaExitosa;
+
+                    return response;
+                }
+
+                response.Success = false;
+                response.Data = null;
+                response.Message = MensajeReferencia.RecursoNoEncontrado;
                 return response;
             }
-
-            response.Success = false;
-            response.Data = null;
-            response.Message = MensajeReferencia.RecursoNoEncontrado;
-            return response;
+            catch(Exception ex)
+            {
+                response.Success = false;
+                response.Data = ex;
+                response.Message = ex.Message;
+                return response;
+            }
+            
         }
     }
 
