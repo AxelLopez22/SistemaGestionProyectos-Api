@@ -11,7 +11,7 @@ namespace Api_ProjectManagement.Common.DTOs
         public DateTime FechaFin { get; set; }
         [Required]
         public int IdProyecto { get; set; }
-        //public int IdTareaPadre { get; set; }
+        public int IdUsuarioCreador { get; set; }
         [Required]
         public int IdUsuario { get; set; }
         public int? IdArchivo { get; set; }
@@ -58,5 +58,25 @@ namespace Api_ProjectManagement.Common.DTOs
         public string Descripcion { get; set; }
         public DateTime FechaFin { get; set; }
         public string Prioridad { get; set; }
+    }
+
+    public class sp_TareasEstados
+    {
+        public int IdTarea { get; set; }
+        public string? Tarea { get; set; }
+        public DateTime FechaEntrega { get; set; }
+        public string? Prioridad { get; set; }
+        public string? Encargado { get; set; }
+        public string? Foto { get; set; }
+        public int IdEstado { get; set; }
+    }
+
+    public class sp_ListarTareasPorUsuario
+    {
+        public int IdTarea { get; set; }
+        public string? Nombre { get; set; }
+        public string? Estado { get; set; }
+        public string? Prioridad { get; set; }
+        public DateTime FechaFin { get; set; }
     }
 }

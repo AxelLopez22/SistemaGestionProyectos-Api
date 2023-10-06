@@ -3,6 +3,7 @@ using Api_ProjectManagement.Common.DTOs.Response;
 using Api_ProjectManagement.Common.References;
 using Api_ProjectManagement.Database;
 using AutoMapper;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api_ProjectManagement.Services
@@ -11,11 +12,13 @@ namespace Api_ProjectManagement.Services
     {
         private readonly ProjectManagementDBContext _context;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
 
-        public EstadoServices(ProjectManagementDBContext context, IMapper mapper)
+        public EstadoServices(ProjectManagementDBContext context, IMapper mapper, IConfiguration configuration)
         {
             _context = context;
             _mapper = mapper;
+            _configuration = configuration;
         }
 
         public async Task<ModelResponse> GetStates()
@@ -78,6 +81,44 @@ namespace Api_ProjectManagement.Services
 
             return response;
         }
+
+        public async Task<ModelResponse> GetStatesOfTask(int IdTask)
+        {
+            var response = new ModelResponse();
+            List<HistorialEstadoDTO> estados = new List<HistorialEstadoDTO>();
+
+            using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("ConnectionDb")))
+            {
+                await connection.OpenAsync();
+
+                string Query = "sp_EstadoTareas";
+
+                SqlCommand command = new SqlCommand(Query, connection);
+                command.Parameters.AddWithValue("@IdTarea", IdTask);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                while(await reader.ReadAsync())
+                {
+                    estados.Add(new HistorialEstadoDTO()
+                    {
+                        Usuario = reader["Usuario"].ToString(),
+                        Estados = reader["Estados"].ToString(),
+                        Fecha = Convert.ToDateTime(reader["Fecha"])
+                    });
+                }
+
+                await reader.CloseAsync();
+                await connection.CloseAsync();
+
+                response.Success = true;
+                response.Data = estados;
+                response.Message = MensajeReferencia.ConsultaExitosa;
+
+                return response;
+            }
+        }
     }
 
     public interface IEstadoServices
@@ -85,5 +126,6 @@ namespace Api_ProjectManagement.Services
         Task<ModelResponse> GetStates();
         Task<ModelResponse> GetStatesByProyect(int IdProyect);
         Task<ModelResponse> GetStatesByTask(int IdTask);
+        Task<ModelResponse> GetStatesOfTask(int IdTask);
     }
 }

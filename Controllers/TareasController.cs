@@ -70,6 +70,27 @@ namespace Api_ProjectManagement.Controllers
             return Ok(result);
         }
 
+        [HttpGet("tareasPorEstados/{IdProyecto}")]
+        public async Task<IActionResult> MostrarTareasPorEstado(int IdProyecto)
+        {
+            var result = await _tareasServices.MostrarTareasPorEstado(IdProyecto);
+            return Ok(result);
+        }
+
+        [HttpGet("tareasPorUsuario/{IdUsuario}")]
+        public async Task<IActionResult> MostrarTareasPorUsuario(int IdUsuario)
+        {
+            var result = await _tareasServices.ListarTareasPorUsuario(IdUsuario);
+            return Ok(result);
+        }
+
+        [HttpGet("descripcionTarea/{IdTarea}")]
+        public async Task<IActionResult> MostrarDescripcionTarea(int IdTarea)
+        {
+            var result = await _tareasServices.MostrarDescripcionTarea(IdTarea);
+            return Ok(result);
+        }
+
         [HttpPost("agregarSubTareas/{IdTarea}")]
         public async Task<IActionResult> AgregarSubTareas(int IdTarea, List<AgregarTareasDTO> subTareas)
         {
@@ -81,6 +102,13 @@ namespace Api_ProjectManagement.Controllers
         public async Task<IActionResult> CrearTarea(AgregarTareasDTO model)
         {
             var result = await _tareasServices.CrearTarea(model);
+            return Ok(result);
+        }
+
+        [HttpPost("validarTarea/{IdTarea}")]
+        public async Task<IActionResult> ValidarTarea(int IdTarea)
+        {
+            var result = await _tareasServices.TieneTareasPendiente(IdTarea);
             return Ok(result);
         }
 

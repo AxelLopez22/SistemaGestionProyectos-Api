@@ -9,7 +9,7 @@
                 options.AddPolicy(name: MyAllowOrigins,
                     builder =>
                     {
-                        builder.WithOrigins("http://gestionproyectos.pcgroupsa.com", "http://localhost:4200")
+                        builder.WithOrigins("http://gestionproyectos.pcgroupsa.com", "http://localhost:4200", "https://development.dom8yh6rxmf8p.amplifyapp.com")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod()
                                 .AllowCredentials();

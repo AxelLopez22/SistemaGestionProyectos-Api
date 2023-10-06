@@ -23,6 +23,7 @@ namespace Api_ProjectManagement.Models
         public int? IdUsuario { get; set; }
         public int? IdArchivo { get; set; }
         public int? IdPrioridad { get; set; }
+        public int? IdUsuarioCreador { get; set; }
 
         public virtual Archivo? IdArchivoNavigation { get; set; }
         public virtual Estado? IdEstadoNavigation { get; set; }

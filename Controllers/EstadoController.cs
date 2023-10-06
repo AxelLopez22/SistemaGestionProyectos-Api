@@ -40,5 +40,12 @@ namespace Api_ProjectManagement.Controllers
             var result = await _stateService.GetStatesByTask(IdTask);
             return Ok(result);
         }
+
+        [HttpGet("getHistoryStateByTask/{IdTask}")]
+        public async Task<IActionResult> GetHistoryStateByProject(int IdTask)
+        {
+            var result = await _stateService.GetStatesOfTask(IdTask);
+            return Ok(result);
+        }
     }
 }

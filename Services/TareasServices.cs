@@ -16,13 +16,15 @@ namespace Api_ProjectManagement.Services
         private readonly ProjectManagementDBContext _context;
         private readonly IMapper _mapper;
         private readonly IFilesServices _filesServices;
+        private readonly IConfiguration _config;
         //private readonly IHubContext<HubServices> _hubContext;
 
-        public TareasServices(ProjectManagementDBContext context, IMapper mapper, IFilesServices filesServices)
+        public TareasServices(ProjectManagementDBContext context, IMapper mapper, IFilesServices filesServices, IConfiguration config)
         {
             _context = context;
             _mapper = mapper;
             _filesServices = filesServices;
+            _config = config;
             //_hubContext = hubContext;
         }
 
@@ -44,6 +46,7 @@ namespace Api_ProjectManagement.Services
                     tarea.IdEstado = 1;
                     tarea.IdArchivo = item.IdArchivo;
                     tarea.IdTareaPadre = IdTarea;
+                    tarea.IdUsuarioCreador = item.IdUsuarioCreador;
 
                     await _context.Tareas.AddAsync(tarea);
                     await _context.SaveChangesAsync();
@@ -142,6 +145,7 @@ namespace Api_ProjectManagement.Services
                 task.IdUsuario = model.IdUsuario;
                 task.IdEstado = 1;
                 task.IdArchivo = model.IdArchivo;
+                task.IdUsuarioCreador = model.IdUsuarioCreador;
 
                 await _context.Tareas.AddAsync(task);
                 await _context.SaveChangesAsync();
@@ -158,6 +162,7 @@ namespace Api_ProjectManagement.Services
                     Subtask.IdTareaPadre = task.IdTarea;
                     Subtask.IdEstado = 1;
                     Subtask.IdUsuario = item.IdUsuario;
+                    Subtask.IdUsuarioCreador = item.IdUsuarioCreador;
                     Subtask.IdArchivo = item.IdArchivo;
 
                     await _context.Tareas.AddAsync(Subtask);
@@ -436,6 +441,150 @@ namespace Api_ProjectManagement.Services
 
             return response;
         }
+
+        public async Task<ModelResponse> MostrarDescripcionTarea(int IdTarea)
+        {
+            ModelResponse response = new ModelResponse();
+            var descripcion = await _context.Tareas.Where(x => x.IdTarea == IdTarea)
+                .Select(x => x.Descripcion).FirstOrDefaultAsync();
+
+            response.Success = true;
+            response.Data = descripcion;
+            response.Message = MensajeReferencia.ConsultaExitosa;
+
+            return response;
+        }
+
+        public async Task<bool> TieneTareasPendiente(int IdTarea)
+        {
+            var Task = await _context.Tareas.Where(x => x.IdTarea == IdTarea && x.IdTareaPadre == null).FirstOrDefaultAsync();
+
+            if(Task == null)
+            {
+                //Retornamos false ya es una subtarea
+                return true;
+            }
+
+            List<Tarea> subtareas = new List<Tarea>();
+
+            subtareas = await _context.Tareas.Where(x => x.IdTareaPadre == Task.IdTarea).ToListAsync();
+            
+            foreach(var tarea in subtareas)
+            {
+                //evaluamos cada subtarea y con una subtarea que no este finalizada, la tarea no se puede finalizar
+                if(tarea.IdEstado != 6)
+                {
+                    return false;
+                }
+            }
+
+            //Si todas las tareas estan terminadas, retornamos true, se puede terminar la tarea
+            return true;
+        }
+
+        //############################################################################################################//
+
+        public async Task<ModelResponse> MostrarTareasPorEstado(int IdProyecto)
+        {
+            ModelResponse response = new ModelResponse();
+            List<sp_TareasEstados> tareas = new List<sp_TareasEstados>();
+            using (SqlConnection connection = new SqlConnection(_config.GetConnectionString("ConnectionDb")))
+            {
+                await connection.OpenAsync();
+
+                string query = "sp_ListarTareasEstados";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@IdProyecto", IdProyecto);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                try
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    while (await reader.ReadAsync())
+                    {
+                        tareas.Add(new sp_TareasEstados()
+                        {
+                            IdTarea = (int)reader["IdTarea"],
+                            Tarea = reader["Tarea"].ToString(),
+                            FechaEntrega = (DateTime)reader["FechaEntrega"],
+                            Prioridad = reader["Prioridad"].ToString(),
+                            Encargado = reader["Encargado"].ToString(),
+                            Foto = reader["Foto"].ToString(),
+                            IdEstado = (int)reader["IdEstado"]
+                        });
+                    }
+
+                    await connection.CloseAsync();
+
+                    response.Success = true;
+                    response.Data = tareas;
+                    response.Message = MensajeReferencia.ConsultaExitosa;
+
+                    return response;
+                } 
+                catch (Exception ex)
+                {
+                    response.Success = false;
+                    response.Data = null;
+                    response.Data = ex.Message;
+
+                    return response;
+                }
+            }
+        }
+
+        public async Task<ModelResponse> ListarTareasPorUsuario(int IdUsuario)
+        {
+            ModelResponse response = new ModelResponse();
+            List<sp_ListarTareasPorUsuario> listTask = new List<sp_ListarTareasPorUsuario>();
+
+            using (SqlConnection connection = new SqlConnection(_config.GetConnectionString("ConnectionDb")))
+            {
+                await connection.OpenAsync();
+
+                string Query = "sp_ListarTareasPorUsuario";
+
+                SqlCommand command = new SqlCommand(Query, connection);
+                command.Parameters.AddWithValue("@IdUsuario", IdUsuario);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                try
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    while (await reader.ReadAsync())
+                    {
+                        listTask.Add(new sp_ListarTareasPorUsuario()
+                        {
+                            IdTarea = (int)reader["IdTarea"],
+                            Nombre = reader["Nombre"].ToString(),
+                            Estado = reader["Estado"].ToString(),
+                            Prioridad = reader["Prioridad"].ToString(),
+                            FechaFin = (DateTime)reader["FechaFin"]
+                        });
+                    }
+
+                    await connection.CloseAsync();
+
+                    response.Success = true;
+                    response.Data = listTask;
+                    response.Message = MensajeReferencia.ConsultaExitosa;
+
+                    return response;
+                }
+                catch (Exception ex)
+                {
+                    response.Success = false;
+                    response.Data = ex.Data;
+                    response.Message = ex.Message;
+
+                    return response;
+                }
+
+            }
+        }
     }
 
     public interface ITareasServices
@@ -452,5 +601,9 @@ namespace Api_ProjectManagement.Services
         Task<ModelResponse> TareasRetrasadas(int IdUsuario);
         Task<ModelResponse> TareasFinalizadas(int IdUsuario);
         Task<ModelResponse> AgregarSubTareas(int IdTarea, List<AgregarTareasDTO> subTareas);
+        Task<bool> TieneTareasPendiente(int IdTarea);
+        Task<ModelResponse> MostrarTareasPorEstado(int IdProyecto);
+        Task<ModelResponse> ListarTareasPorUsuario(int IdUsuario);
+        Task<ModelResponse> MostrarDescripcionTarea(int IdTarea);
     }
 }

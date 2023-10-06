@@ -20,7 +20,8 @@ string MyAllowOrigins = "MyAllowOrigins";
 
 builder.Services.AddDbContext<ProjectManagementDBContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionDb"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionDb"),
+        opt => opt.EnableRetryOnFailure());
 });
 
 //Configuracion de servicio automapper
@@ -82,6 +83,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseCors(MyAllowOrigins);
+
+app.UseHttpsRedirection();
 
 app.UseMiddleware<ExceptionMiddleware>();
 

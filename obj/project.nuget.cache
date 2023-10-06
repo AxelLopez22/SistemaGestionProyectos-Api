@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "G+zv1VbAmpj8qU+0fnt31bINJ+qQSV2MZ1klE5ON3QZ/1vNXOkmqLLO3jWy0q+dWfencEPR3fb10TFMsKJSimg==",
+  "dgSpecHash": "WHCabwPWlALYE4UaUB4SSohiw9KK/qmk03tNqarL2pERSN70CgiQMvt5wOqxvOeIGFyMW/FkcY1OkllEjXm6Ug==",
   "success": true,
   "projectFilePath": "C:\\Users\\Axell\\OneDrive\\Escritorio\\.NetCore\\SistemaGestionProyectos-Api\\Api-ProjectManagement.csproj",
   "expectedPackageFiles": [
@@ -39,6 +39,7 @@
     "C:\\Users\\Axell\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\Axell\\.nuget\\packages\\microsoft.owin\\2.1.0\\microsoft.owin.2.1.0.nupkg.sha512",
     "C:\\Users\\Axell\\.nuget\\packages\\microsoft.owin.security\\2.1.0\\microsoft.owin.security.2.1.0.nupkg.sha512",
+    "C:\\Users\\Axell\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.18.1\\microsoft.visualstudio.azure.containers.tools.targets.1.18.1.nupkg.sha512",
     "C:\\Users\\Axell\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Axell\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\Axell\\.nuget\\packages\\newtonsoft.json\\6.0.4\\newtonsoft.json.6.0.4.nupkg.sha512",

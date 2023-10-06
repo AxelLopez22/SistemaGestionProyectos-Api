@@ -76,3 +76,4 @@ C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\obj\Rele
 C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\obj\Release\net6.0\Api-ProjectManagement.pdb
 C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\obj\Release\net6.0\Api-ProjectManagement.genruntimeconfig.cache
 C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\obj\Release\net6.0\ref\Api-ProjectManagement.dll
+C:\Users\Axell\OneDrive\Escritorio\.NetCore\SistemaGestionProyectos-Api\bin\Release\net6.0\aws-beanstalk-tools-defaults.json

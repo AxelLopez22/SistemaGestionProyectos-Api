@@ -5,41 +5,44 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA9UkNHaVws0mi8M7qQ/KWagAAAAACAAAAAAAQZgAAAAEAACAAAAAY51xBFIN0ZYWa2/5WLCRurmtunFOfRCpGluFiZUKj+AAAAAAOgAAAAAIAACAAAABPTs1RnpfLLRpGlyobMpZWHXO7TKxczhMsWJoSfKSzYSAAAACiKcZalGP5Qb203WTeFoUYCUHl4DBo4MOEjIuDeJMfQUAAAAC6oWxfmKfSL73Or3qmEN5lDx8v59OMjko3JuDKmPaeYw3pLg4CbG84J0CB1bnCxsGjSHsClQUVDIytwCNlzLyx</EncryptedPassword>
-    <_PublishTargetUrl>ftp://198.37.116.25/www.gestion-proyectos.somee.com</_PublishTargetUrl>
-    <History>True|2023-09-02T04:37:00.0646911Z;False|2023-09-01T22:36:04.3534771-06:00;True|2023-09-01T21:22:56.1137634-06:00;</History>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA9UkNHaVws0mi8M7qQ/KWagAAAAACAAAAAAAQZgAAAAEAACAAAAAqLNqR/+oei61MEw45qyxvR2nUSl1Rpo/hx4e51V1AJwAAAAAOgAAAAAIAACAAAACKV9lnmel53CnLc2kfuAQ8ZahVzQr+KFjevzxdAfGOTyAAAAC+LDa8skLdmUFMD9eALvW6PA2e9pHBrZ/nwxBa3XIaKkAAAAD+K1Iso16xgXzqi3lUNFbTf18HQH1E/BFbYkmgagLbB9t3tHty/7+/YEv4IdNXbReopkQ2HDzb6l5gnAeHBRJC</EncryptedPassword>
+    <_PublishTargetUrl>ftp://198.37.116.29/www.gestion-proyectos.somee.com</_PublishTargetUrl>
+    <History>True|2023-09-23T10:07:02.0831673Z;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="Api-ProjectManagement.deps.json">
-      <publishTime>09/01/2023 22:36:44</publishTime>
+      <publishTime>09/23/2023 04:05:18</publishTime>
     </File>
     <File Include="Api-ProjectManagement.dll">
-      <publishTime>09/01/2023 22:36:44</publishTime>
+      <publishTime>09/23/2023 04:05:07</publishTime>
     </File>
     <File Include="Api-ProjectManagement.exe">
-      <publishTime>09/01/2023 22:35:44</publishTime>
+      <publishTime>09/23/2023 04:05:07</publishTime>
     </File>
     <File Include="Api-ProjectManagement.pdb">
-      <publishTime>09/01/2023 22:35:44</publishTime>
+      <publishTime>09/23/2023 04:05:07</publishTime>
     </File>
     <File Include="Api-ProjectManagement.runtimeconfig.json">
-      <publishTime>09/01/2023 21:18:29</publishTime>
+      <publishTime>09/23/2023 04:05:08</publishTime>
     </File>
     <File Include="appsettings.Development.json">
-      <publishTime>08/31/2023 22:31:39</publishTime>
+      <publishTime>09/21/2023 19:54:53</publishTime>
     </File>
     <File Include="appsettings.json">
       <publishTime>07/19/2023 14:19:22</publishTime>
     </File>
     <File Include="appsettings.Production.json">
-      <publishTime>08/31/2023 22:31:43</publishTime>
+      <publishTime>09/23/2023 01:09:52</publishTime>
     </File>
     <File Include="AutoMapper.dll">
       <publishTime>01/16/2023 09:41:56</publishTime>
     </File>
     <File Include="AutoMapper.Extensions.Microsoft.DependencyInjection.dll">
       <publishTime>04/08/2023 23:58:02</publishTime>
+    </File>
+    <File Include="aws-beanstalk-tools-defaults.json">
+      <publishTime>09/23/2023 03:26:27</publishTime>
     </File>
     <File Include="Microsoft.AspNet.SignalR.Core.dll">
       <publishTime>01/13/2022 20:40:14</publishTime>
@@ -174,7 +177,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/15/2019 02:56:52</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>09/01/2023 22:35:45</publishTime>
+      <publishTime>09/23/2023 04:05:18</publishTime>
     </File>
     <File Include="wwwroot/Fotos/28a87cab-50ac-4c87-9e59-527a28b8c5fa.jpg">
       <publishTime>07/19/2023 14:19:22</publishTime>
